@@ -27,4 +27,31 @@ Start your code below 👇
 // You'll fetch data from your selected API and display it on the page
 
 // Example placeholder:
-console.log("Team activity starter code loaded.");
+// ...existing code...
+
+function fetchAndDisplayFact() {
+    fetch('https://uselessfacts.jsph.pl/random.json?language=en')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            const outputElem = document.getElementById('output');
+            if (outputElem) {
+                outputElem.textContent = data.text;
+            }
+        })
+        .catch(function(error) {
+            console.error('Error fetching fact:', error);
+            const outputElem = document.getElementById('output');
+            if (outputElem) {
+                outputElem.textContent = 'Failed to fetch a fact. Please try again later.';
+            }
+        });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('factButton');
+    if (button) {
+        button.addEventListener('click', fetchAndDisplayFact);
+    }
+});
